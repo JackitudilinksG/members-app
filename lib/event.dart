@@ -51,14 +51,14 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Events'),
+        title: const Text('Events'),
       ),
       body: Stack(
         fit: StackFit.expand,
         children: [
           Positioned.fill(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/background(temp).png'),
                   fit: BoxFit.cover,
@@ -70,8 +70,8 @@ class _EventsPageState extends State<EventsPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                margin: EdgeInsets.all(16.0),
-                padding: EdgeInsets.all(16.0),
+                margin: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(8.0),
@@ -81,27 +81,27 @@ class _EventsPageState extends State<EventsPage> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text('Add New Event'),
+                        title: const Text('Add New Event'),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             TextField(
                               controller: eventLeaderController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'Event Leader',
                               ),
                             ),
                             SizedBox(height: 8.0),
                             TextField(
                               controller: eventNameController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'Event Name',
                               ),
                             ),
                             SizedBox(height: 8.0),
                             TextField(
                               controller: eventDescriptionController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'Event Description',
                               ),
                             ),
@@ -112,14 +112,14 @@ class _EventsPageState extends State<EventsPage> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text('Cancel'),
+                            child: const Text('Cancel'),
                           ),
                           ElevatedButton(
                             onPressed: () {
                               _addEvent();
                               Navigator.pop(context);
                             },
-                            child: Text('Add Event'),
+                            child: const Text('Add Event'),
                           ),
                         ],
                       ),
@@ -127,13 +127,13 @@ class _EventsPageState extends State<EventsPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.blue,
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
                     elevation: 2.0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Add New Event',
                     style: TextStyle(fontSize: 16.0),
                   ),
@@ -141,14 +141,14 @@ class _EventsPageState extends State<EventsPage> {
               ),
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.transparent,
                   ),
                   child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance.collection('events').snapshots(),
                     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       }
@@ -156,12 +156,12 @@ class _EventsPageState extends State<EventsPage> {
                         final List<QueryDocumentSnapshot> documents = snapshot.data!.docs;
                         return ListView.separated(
                           itemCount: documents.length,
-                          separatorBuilder: (context, index) => SizedBox(height: 8.0),
+                          separatorBuilder: (context, index) => const SizedBox(height: 8.0),
                           itemBuilder: (context, index) {
                             final Map<String, dynamic>? data = documents[index].data() as Map<String, dynamic>?;
 
                             if (data == null) {
-                              return SizedBox.shrink();
+                              return const SizedBox.shrink();
                             }
 
                             final String title = data['title'] ?? '';
@@ -182,7 +182,7 @@ class _EventsPageState extends State<EventsPage> {
                                 );
                               },
                               child: Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage('assets/background(temp).png'),
                                     fit: BoxFit.cover,
@@ -193,7 +193,7 @@ class _EventsPageState extends State<EventsPage> {
                                     leading: Container(
                                       width: 48,
                                       height: 48,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.cover,
@@ -206,7 +206,7 @@ class _EventsPageState extends State<EventsPage> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(description),
-                                        SizedBox(height: 4.0),
+                                        const SizedBox(height: 4.0),
                                         Text('Leader: $leader'),
                                       ],
                                     ),
@@ -217,7 +217,7 @@ class _EventsPageState extends State<EventsPage> {
                           },
                         );
                       }
-                      return SizedBox.shrink();
+                      return const SizedBox.shrink();
                     },
                   ),
                 ),
@@ -256,10 +256,10 @@ class _EventDetailsState extends State<EventDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Event Details'),
+        title: const Text('Event Details'),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/background(temp).png'),
             fit: BoxFit.cover,
@@ -271,17 +271,17 @@ class _EventDetailsState extends State<EventDetails> {
           children: [
             Text(
               'Event Leader: ${widget.eventLeader}',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.white),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(
               'Event Name: ${widget.eventName}',
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(
               'Event Description: ${widget.eventDescription}',
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             SizedBox(height: 16.0),
             Slider(
